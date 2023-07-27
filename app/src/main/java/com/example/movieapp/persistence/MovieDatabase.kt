@@ -8,7 +8,7 @@ import com.example.movieapp.data.vos.MovieVO
 import com.example.movieapp.persistence.daos.MovieDao
 
 
-@Database(entities = [MovieVO::class], version = 4, exportSchema = false)
+@Database(entities = [MovieVO::class], version = 5, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase(){
 
     companion object{

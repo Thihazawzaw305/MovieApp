@@ -6,18 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
 import com.example.movieapp.data.models.MovieModel
 import com.example.movieapp.data.models.MovieModelImpl
 import com.example.movieapp.data.vos.GenreVO
 import com.example.movieapp.data.vos.MovieVO
+import com.example.movieapp.mvvm.MovieDetailsViewModel
 import com.example.movieapp.utils.IMAGE_BASE_URL
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AppCompatActivity() {
     private val mMovieModel: MovieModel = MovieModelImpl
+    private lateinit var mViewModel : MovieDetailsViewModel
     companion object {
 
         const val MOVIE_ID = "MOVIE_ID"
@@ -32,32 +35,50 @@ class MovieDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         setUpListener()
-        val movieId = 460465
-            //intent?.getIntExtra(MOVIE_ID, 0)
+        val movieId = intent?.getIntExtra(MOVIE_ID, 0)
 
-        if (movieId != null) {
-            requestData(movieId)
+//        if (movieId != null) {
+//            requestData(movieId)
+//        }
+        movieId?.let {
+            setUpViewModel(it)
+        }
+        observeData()
+    }
+
+    private fun setUpViewModel(movieId: Int){
+        mViewModel =ViewModelProvider(this)[MovieDetailsViewModel::class.java]
+        mViewModel.getInitialData(movieId)
+    }
+
+    private fun observeData(){
+        mViewModel.movieDetailsLiveData?.observe(this){
+            it?.let { movie -> bindData(movie) }
+        }
+        mViewModel.castLiveData.observe(this){
+            tvCast.text = "${it[0].name.toString()},${it[1].name.toString()},${it[2].name.toString()},${it[3].name.toString()}"
+
         }
     }
 
-    private fun requestData(movieId : Int){
-        mMovieModel.getMovieDetails(movieId = movieId.toString(), onFailure = {
-            Snackbar.make(window.decorView,it,Snackbar.LENGTH_SHORT).show()
-        })?.observe(this,
-            Observer {
-                it?.let { movieDetails -> bindData(movieDetails) }
-            })
-
-
-
-        mMovieModel.getActorByMovie(movieId = movieId.toString(),
-        onSuccess = {
-           tvCast.text = "${it[0].name.toString()},${it[1].name.toString()},${it[2].name.toString()},${it[3].name.toString()}"
-        },
-        onFailure = {
-            Snackbar.make(window.decorView, it, Snackbar.LENGTH_SHORT).show()
-        })
-    }
+//    private fun requestData(movieId : Int){
+//        mMovieModel.getMovieDetails(movieId = movieId.toString(), onFailure = {
+//            Snackbar.make(window.decorView,it,Snackbar.LENGTH_SHORT).show()
+//        })?.observe(this,
+//            Observer {
+//                it?.let { movieDetails -> bindData(movieDetails) }
+//            })
+//
+//
+//
+//        mMovieModel.getActorByMovie(movieId = movieId.toString(),
+//        onSuccess = {
+//           tvCast.text = "${it[0].name.toString()},${it[1].name.toString()},${it[2].name.toString()},${it[3].name.toString()}"
+//        },
+//        onFailure = {
+//            Snackbar.make(window.decorView, it, Snackbar.LENGTH_SHORT).show()
+//        })
+//    }
 
     private fun bindData(movie : MovieVO){
         Glide.with(this)

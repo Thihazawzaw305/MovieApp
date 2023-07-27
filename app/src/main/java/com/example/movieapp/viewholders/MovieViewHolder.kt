@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.data.vos.MovieVO
 import com.example.movieapp.delegates.MovieViewHolderDelegate
 import com.example.movieapp.utils.IMAGE_BASE_URL
+import kotlinx.android.synthetic.main.view_holder_banner_showcase.view.*
 import kotlinx.android.synthetic.main.view_holder_movie.view.*
 
 class MovieViewHolder (itemView: View,private val delegate : MovieViewHolderDelegate) :
@@ -19,6 +20,10 @@ class MovieViewHolder (itemView: View,private val delegate : MovieViewHolderDele
                 delegate.onTapMovie(it.id)
             }
 
+        itemView.btnWishlistFromMovie.setOnCheckedChangeListener { buttonView, isChecked ->
+            mMovie?.wishlist = true
+
+        }
         }
 
     }

@@ -22,6 +22,10 @@ import com.google.gson.annotations.SerializedName
 
 
 data class MovieVO(
+    @ColumnInfo(name = "wishlist")
+    @SerializedName("wishlist")
+    var wishlist : Boolean = false,
+
     @ColumnInfo(name = "adult")
     @SerializedName("adult")
     val adult: Boolean?,

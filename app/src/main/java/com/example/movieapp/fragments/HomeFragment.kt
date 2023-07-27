@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
 import com.example.movieapp.activities.MovieDetailActivity
 import com.example.movieapp.adapters.BannerShowCaseAdapter
@@ -16,6 +17,7 @@ import com.example.movieapp.data.models.MovieModelImpl
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.delegates.BannerShowCaseViewHolderDelegate
 import com.example.movieapp.delegates.MovieViewHolderDelegate
+import com.example.movieapp.mvvm.MainViewModel
 import com.example.movieapp.viewpods.MovieListViewPod
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -29,6 +31,7 @@ class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHold
 
     //model
     private val mMovieModel: MovieModel = MovieModelImpl
+    private lateinit var  mViewModel :MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,11 +46,14 @@ class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHold
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpViewModel()
         setUpBanner()
         setUpViewPod()
-        requestData()
+        observeLiveData()
+     //   requestData()
 
     }
+
 
     //setUpBanner
     private fun setUpBanner() {
@@ -66,6 +72,22 @@ class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHold
 
     }
 
+    // view model
+    private fun setUpViewModel(){
+        mViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mViewModel.getInitialData()
+    }
+
+    private fun observeLiveData(){
+        mViewModel.upComingMoviesLiveData?.observe(viewLifecycleOwner){
+            mBannerShowCaseAdapter.setNewData(it)
+            mUpComingMovieListViewPod.setData(it)
+        }
+        mViewModel.popularMovieLiveData?.observe(viewLifecycleOwner){
+            mPopularMovieListViewPod.setData(it)
+        }
+    }
+
     override fun onTapMovieFromBanner(movieId: Int) {
         startActivity(MovieDetailActivity.newIntent(requireContext(), movieId))
     }
@@ -74,22 +96,22 @@ class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHold
         startActivity(MovieDetailActivity.newIntent(requireContext(), movieId))
     }
 
-    private fun requestData() {
-        mMovieModel.getUpComingMovies {
-            showError(it)
-        }?.observe(viewLifecycleOwner, Observer {
-            mBannerShowCaseAdapter.setNewData(it)
-            mUpComingMovieListViewPod.setData(it)
-        })
-
-        mMovieModel.getPopularMovies {
-            showError(it)
-        }?.observe(viewLifecycleOwner, Observer {
-            mPopularMovieListViewPod.setData(it)
-        })
-    }
-
-    private fun showError(error: String) {
-        Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
-    }
+//    private fun requestData() {
+//        mMovieModel.getUpComingMovies {
+//            showError(it)
+//        }?.observe(viewLifecycleOwner, Observer {
+//            mBannerShowCaseAdapter.setNewData(it)
+//            mUpComingMovieListViewPod.setData(it)
+//        })
+//
+//        mMovieModel.getPopularMovies {
+//            showError(it)
+//        }?.observe(viewLifecycleOwner, Observer {
+//            mPopularMovieListViewPod.setData(it)
+//        })
+//    }
+//
+//    private fun showError(error: String) {
+//        Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+//    }
 }

@@ -1,0 +1,326 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey"
+    tools:context=".activities.MovieDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/grey">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:src="@drawable/ic_baseline_chevron_left_black_24"
+            android:tint="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rlMovieDetail"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@drawable/background_color_blur">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMovieDetail"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginTop="@dimen/margin_medium_2"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/oppenheimer" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMovieDetailTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/ivMovieDetail"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginTop="@dimen/margin_medium_2"
+                    android:layout_toEndOf="@id/ivMovieDetail"
+                    tools:text="Oppenheimer"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_regular_3x"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMovieDetailGenre"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvMovieDetailTitle"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:layout_marginTop="@dimen/margin_medium_2"
+                    android:layout_toEndOf="@id/ivMovieDetail"
+                    android:text="@string/lbl_genre"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_regular_2x" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium_2"
+                    android:background="@drawable/background_buttom"
+                    android:drawableLeft="@drawable/ic_baseline_play_arrow_black_24"
+                    android:drawableTint="@color/white"
+                   android:paddingTop="@dimen/margin_card_medium"
+                    android:paddingBottom="@dimen/margin_card_medium"
+                    android:paddingEnd="@dimen/margin_card_medium_2"
+                    android:text="Watch Now"
+                    android:drawablePadding="@dimen/margin_medium"
+                    android:layout_alignBottom="@id/ivMovieDetail"
+                    android:layout_toEndOf="@id/ivMovieDetail"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_regular_2x"
+                    android:textStyle="bold" />
+
+
+
+          <LinearLayout
+              android:id="@+id/llIcons"
+              android:layout_below="@id/ivMovieDetail"
+              android:layout_marginTop="@dimen/margin_medium_3"
+              android:layout_width="match_parent"
+              android:weightSum="3"
+              android:layout_height="wrap_content">
+              <androidx.appcompat.widget.AppCompatImageView
+                  android:id="@+id/ivWishlistMovieDetail"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="30dp"
+                  android:src="@drawable/ic_baseline_bookmark_border_black_24"
+                  android:tint="@color/white"/>
+              <androidx.appcompat.widget.AppCompatImageView
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="30dp"
+                  android:src="@drawable/ic_baseline_play_circle_black_24"
+                  android:tint="@color/white"/>
+              <androidx.appcompat.widget.AppCompatImageView
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_height="30dp"
+                  android:src="@drawable/ic_baseline_movie_black_24"
+                  android:tint="@color/white"/>
+
+          </LinearLayout>
+
+                <LinearLayout
+                    android:layout_below="@id/llIcons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3">
+                  <androidx.appcompat.widget.AppCompatTextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Wishlist"
+                      android:layout_weight="1"
+                      android:gravity="center_horizontal"
+                      android:textSize="@dimen/text_regular_2x"
+                      android:textColor="@color/white"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Watch Tralier"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textSize="@dimen/text_regular_2x"
+                        android:textColor="@color/white"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Season"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:textSize="@dimen/text_regular_2x"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+           <androidx.appcompat.widget.AppCompatTextView
+               android:id="@+id/tvStoryLine"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@id/rlMovieDetail"
+               android:textSize="@dimen/text_regular_2x"
+               android:textColor="@color/white"
+               android:layout_marginTop="@dimen/margin_medium_2"
+               android:layout_marginStart="@dimen/margin_medium_2"
+               android:layout_marginEnd="@dimen/margin_medium_2"
+               android:text="@string/lbl_story_line"/>
+
+               <androidx.appcompat.widget.AppCompatTextView
+                   android:id="@+id/tvReleaseDateTitle"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/lbl_release_date"
+                   android:textStyle="bold"
+                   android:layout_below="@id/tvStoryLine"
+                   android:layout_marginTop="@dimen/margin_medium_2"
+                   android:layout_marginStart="@dimen/margin_medium_2"
+                   android:textSize="@dimen/text_regular_3x"
+                   android:textColor="@android:color/darker_gray"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_date"
+                android:textStyle="bold"
+                android:layout_below="@id/tvReleaseDateTitle"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_2x"
+                android:textColor="@color/white"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvGenreTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_genre"
+                android:textStyle="bold"
+                android:layout_below="@id/tvReleaseDate"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_3x"
+                android:textColor="@android:color/darker_gray"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/genre"
+                android:layout_below="@id/tvGenreTitle"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_2x"
+                android:textColor="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCastTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_cast"
+                android:textStyle="bold"
+                android:layout_below="@id/tvGenre"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_3x"
+                android:textColor="@android:color/darker_gray"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_actors"
+                android:layout_below="@id/tvCastTitle"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_2x"
+                android:textColor="@color/white"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRatingsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_ratings"
+                android:textStyle="bold"
+                android:layout_below="@id/tvCast"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_3x"
+                android:textColor="@color/white"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSeeMoreTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lbl_see_more"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:layout_below="@id/tvCast"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:textSize="@dimen/text_regular_3x"
+                android:textColor="@color/white"/>
+            <LinearLayout
+                android:id="@+id/llRating"
+                android:layout_below="@id/tvRatingsTitle"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_width="match_parent"
+                android:weightSum="1"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:background="@drawable/background_buttom"
+                android:backgroundTint="#474646"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="4.9"
+                    android:textSize="@dimen/text_regular_2x"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:padding="@dimen/margin_medium_2"
+                    android:textColor="@color/white"/>
+                <RatingBar
+                    android:id="@+id/rbrRatingMovieDetail"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:numStars="5"
+                    android:layout_weight="0.25"
+                    android:progress="5"
+                    android:progressTint="@color/purple"
+                    android:rating="5" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvRatingCount"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    android:text="@string/lbl_rating_count"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_regular" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llRating"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_regular_3x"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="@string/lbl_give_ratings"
+                android:paddingTop="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_medium"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3"
+                android:layout_marginBottom="@dimen/margin_medium_2"
+                android:background="@drawable/background_buttom"/>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

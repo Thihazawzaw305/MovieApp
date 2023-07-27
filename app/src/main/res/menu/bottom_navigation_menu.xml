@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/action_Home"
+    android:icon="@drawable/ic_baseline_home_black_24"
+    android:title="@string/lbl_home"/>
+
+    <item
+        android:id="@+id/action_Search"
+        android:icon="@drawable/ic_baseline_search_black_24"
+        android:title="@string/lbl_home"/>
+    <item
+        android:id="@+id/action_Wishlist"
+        android:icon="@drawable/ic_baseline_bookmark_border_black_24"
+        android:title="@string/lbl_home"/>
+    <item
+        android:id="@+id/action_Profile"
+        android:icon="@drawable/ic_baseline_person_black_24"
+        android:title="@string/lbl_home"/>
+</menu>

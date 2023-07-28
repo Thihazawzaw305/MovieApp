@@ -12,10 +12,11 @@ import com.example.movieapp.data.models.MovieModel
 import com.example.movieapp.data.models.MovieModelImpl
 import com.example.movieapp.data.vos.MovieVO
 import com.example.movieapp.delegates.MovieViewHolderDelegate
+import com.example.movieapp.delegates.WishlistDelegate
 import com.example.movieapp.persistence.MovieDatabase
 import kotlinx.android.synthetic.main.fragment_wishlist.*
 
-class WishlistFragment : Fragment() , MovieViewHolderDelegate {
+class WishlistFragment : Fragment() , MovieViewHolderDelegate,WishlistDelegate {
     private lateinit var mMovieAdapter : MovieListAdapter
     private val mMovieModel : MovieModel = MovieModelImpl
     private var wishlistmovie : List<MovieVO> = listOf()
@@ -39,19 +40,27 @@ class WishlistFragment : Fragment() , MovieViewHolderDelegate {
         getData()
     }
     private fun setUpRecyclerView(){
-        mMovieAdapter = MovieListAdapter(this)
+        mMovieAdapter = MovieListAdapter(this,this)
         rvWishlist.adapter = mMovieAdapter
         rvWishlist.layoutManager = GridLayoutManager(context,2)
     }
 
     private fun getData(){
-        mMovieModel.getAllMovies()?.observe(viewLifecycleOwner){
+        mMovieModel.getAllWishListMovies(true)?.observe(viewLifecycleOwner){
            mMovieAdapter.setNewData(it)
 
         }
     }
 
     override fun onTapMovie(movieId: Int) {
+
+    }
+
+    override fun checkWishlist(movieId: Int, wishlist: Boolean) {
+
+    }
+
+    override fun unCheckWishlist() {
 
     }
 }

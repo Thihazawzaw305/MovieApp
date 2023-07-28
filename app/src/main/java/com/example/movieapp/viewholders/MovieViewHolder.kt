@@ -5,11 +5,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.data.vos.MovieVO
 import com.example.movieapp.delegates.MovieViewHolderDelegate
+import com.example.movieapp.delegates.WishlistDelegate
 import com.example.movieapp.utils.IMAGE_BASE_URL
 import kotlinx.android.synthetic.main.view_holder_banner_showcase.view.*
 import kotlinx.android.synthetic.main.view_holder_movie.view.*
 
-class MovieViewHolder(itemView: View, private val delegate: MovieViewHolderDelegate) :
+class MovieViewHolder(itemView: View, private val delegate: MovieViewHolderDelegate, private val checkDelegate : WishlistDelegate) :
     RecyclerView.ViewHolder(itemView) {
 
     private var mMovie: MovieVO? = null
@@ -18,20 +19,25 @@ class MovieViewHolder(itemView: View, private val delegate: MovieViewHolderDeleg
         itemView.setOnClickListener {
             mMovie?.let {
                 delegate.onTapMovie(it.id)
-            }
+            }}
 
             itemView.btnWishlistFromMovie.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked)
+                {
                     mMovie?.let {
-                        it.wishlist = true
+                        checkDelegate.checkWishlist(it.id, true)
                     }
+
+                }
                 else
-                    mMovie?.let {
-                        it.wishlist = false
+                { mMovie?.let {
+                    checkDelegate.unCheckWishlist()
+                }
+
                     }
 
             }
-        }
+
 
     }
 

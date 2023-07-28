@@ -17,13 +17,14 @@ import com.example.movieapp.data.models.MovieModelImpl
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.delegates.BannerShowCaseViewHolderDelegate
 import com.example.movieapp.delegates.MovieViewHolderDelegate
+import com.example.movieapp.delegates.WishlistDelegate
 import com.example.movieapp.mvvm.MainViewModel
 import com.example.movieapp.viewpods.MovieListViewPod
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHolderDelegate {
+class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHolderDelegate,WishlistDelegate {
     private lateinit var mBannerShowCaseAdapter: BannerShowCaseAdapter
     private lateinit var mUpComingMovieListViewPod: MovieListViewPod
     private lateinit var mPopularMovieListViewPod: MovieListViewPod
@@ -65,9 +66,9 @@ class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHold
     private fun setUpViewPod() {
 
         mUpComingMovieListViewPod = vpUpComingMovieList as MovieListViewPod
-        mUpComingMovieListViewPod.setUpMovieListViewPod(this)
+        mUpComingMovieListViewPod.setUpMovieListViewPod(this,this)
         mPopularMovieListViewPod = vpPopularMovieList as MovieListViewPod
-        mPopularMovieListViewPod.setUpMovieListViewPod(this)
+        mPopularMovieListViewPod.setUpMovieListViewPod(this,this)
 
 
     }
@@ -94,6 +95,14 @@ class HomeFragment : Fragment(), BannerShowCaseViewHolderDelegate, MovieViewHold
 
     override fun onTapMovie(movieId: Int) {
         startActivity(MovieDetailActivity.newIntent(requireContext(), movieId))
+    }
+
+    override fun checkWishlist(movieId: Int, wishlist : Boolean) {
+       mMovieModel.addWishlist(movieId,wishlist)
+    }
+
+    override fun unCheckWishlist() {
+
     }
 
 //    private fun requestData() {

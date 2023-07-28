@@ -78,8 +78,12 @@ object MovieModelImpl: MovieModel, BaseModel() {
             },{onFailure(it.localizedMessage ?: "")})
     }
 
-    override fun getAllMovies(): LiveData<List<MovieVO>>? {
-        return mMovieDatabase?.movieDao()?.getAllMovies()
+    override fun addWishlist(movieId: Int, wishList: Boolean) {
+      mMovieDatabase?.movieDao()?.addWishlist(movieId,wishList)
+    }
+
+    override fun getAllWishListMovies(wishlist: Boolean): LiveData<List<MovieVO>>? {
+     return mMovieDatabase?.movieDao()?.getAllWishListMovies(wishlist)
     }
 
 

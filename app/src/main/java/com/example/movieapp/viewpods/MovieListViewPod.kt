@@ -9,6 +9,7 @@ import com.example.movieapp.R
 import com.example.movieapp.adapters.MovieListAdapter
 import com.example.movieapp.data.vos.MovieVO
 import com.example.movieapp.delegates.MovieViewHolderDelegate
+import com.example.movieapp.delegates.WishlistDelegate
 
 class MovieListViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -16,10 +17,11 @@ class MovieListViewPod @JvmOverloads constructor(
 
     private lateinit var mMovieListAdapter: MovieListAdapter
    private lateinit var mDelegate : MovieViewHolderDelegate
+   private lateinit var wishlistDelegate: WishlistDelegate
 
 
-    fun setUpMovieListViewPod(delegate : MovieViewHolderDelegate){
-        setDelegate(delegate)
+    fun setUpMovieListViewPod(delegate : MovieViewHolderDelegate, wishlistDelegate: WishlistDelegate){
+        setDelegate(delegate, wishlistDelegate)
         setUpRecyclerView()
     }
 
@@ -27,13 +29,14 @@ class MovieListViewPod @JvmOverloads constructor(
         mMovieListAdapter.setNewData(popularMovieList)
     }
 
-    private fun setDelegate(delegate : MovieViewHolderDelegate){
+    private fun setDelegate(delegate : MovieViewHolderDelegate, wishlistDelegate: WishlistDelegate){
         this.mDelegate = delegate
+        this.wishlistDelegate = wishlistDelegate
 
     }
 
      fun setUpRecyclerView() {
-        mMovieListAdapter = MovieListAdapter(mDelegate)
+        mMovieListAdapter = MovieListAdapter(mDelegate,wishlistDelegate)
         val rvMovieList = findViewById<RecyclerView>(R.id.rvMovieList)
         rvMovieList.adapter = mMovieListAdapter
         rvMovieList.layoutManager = LinearLayoutManager(

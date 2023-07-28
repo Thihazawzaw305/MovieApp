@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.data.vos.MovieVO
 import com.example.movieapp.delegates.MovieViewHolderDelegate
+import com.example.movieapp.delegates.WishlistDelegate
 import com.example.movieapp.viewholders.MovieViewHolder
 
-class MovieListAdapter(private val delegate: MovieViewHolderDelegate): RecyclerView.Adapter<MovieViewHolder>() {
+class MovieListAdapter(private val delegate: MovieViewHolderDelegate, private val wishlistDelegate: WishlistDelegate): RecyclerView.Adapter<MovieViewHolder>() {
 
     private var mMovieList : List<MovieVO> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie,parent,false)
-        return MovieViewHolder(view, delegate )
+        return MovieViewHolder(view, delegate,wishlistDelegate )
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

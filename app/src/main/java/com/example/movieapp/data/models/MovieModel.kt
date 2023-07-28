@@ -22,5 +22,6 @@ interface MovieModel {
         onSuccess: (List<ActorVO>) -> Unit,
         onFailure: (String) -> Unit
     )
-    fun getAllMovies() : LiveData<List<MovieVO>>?
+   fun addWishlist(movieId : Int, wishList : Boolean)
+    fun getAllWishListMovies(wishlist: Boolean): LiveData<List<MovieVO>>?
 }

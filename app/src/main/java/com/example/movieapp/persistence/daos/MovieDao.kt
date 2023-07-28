@@ -37,6 +37,12 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSingleMovie(movie: MovieVO? )
 
+    @Query("UPDATE movies SET wishlist = :wishlist WHERE id = :movieId")
+    fun addWishlist(movieId: Int, wishlist : Boolean)
+
+    @Query("SELECT * FROM movies WHERE wishlist = :wishlist")
+    fun getAllWishListMovies(wishlist: Boolean): LiveData<List<MovieVO>>
+
     @Query("SELECT * FROM movies")
     fun getAllMovies() : LiveData<List<MovieVO>>
 

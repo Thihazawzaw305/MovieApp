@@ -9,7 +9,7 @@ import com.example.movieapp.utils.IMAGE_BASE_URL
 import kotlinx.android.synthetic.main.view_holder_banner_showcase.view.*
 import kotlinx.android.synthetic.main.view_holder_movie.view.*
 
-class MovieViewHolder (itemView: View,private val delegate : MovieViewHolderDelegate) :
+class MovieViewHolder(itemView: View, private val delegate: MovieViewHolderDelegate) :
     RecyclerView.ViewHolder(itemView) {
 
     private var mMovie: MovieVO? = null
@@ -20,10 +20,17 @@ class MovieViewHolder (itemView: View,private val delegate : MovieViewHolderDele
                 delegate.onTapMovie(it.id)
             }
 
-        itemView.btnWishlistFromMovie.setOnCheckedChangeListener { buttonView, isChecked ->
-            mMovie?.wishlist = true
+            itemView.btnWishlistFromMovie.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked)
+                    mMovie?.let {
+                        it.wishlist = true
+                    }
+                else
+                    mMovie?.let {
+                        it.wishlist = false
+                    }
 
-        }
+            }
         }
 
     }
@@ -34,7 +41,9 @@ class MovieViewHolder (itemView: View,private val delegate : MovieViewHolderDele
         Glide.with(itemView.context)
             .load("$IMAGE_BASE_URL${movie.posterPath}")
             .into(itemView.ivMovieImage)
-
+        if (movie.wishlist) {
+            itemView.btnWishlistFromMovie.isChecked
+        }
         itemView.tvMovieName.text = movie.title
         itemView.tvMovieRating.text = movie.voteAverage.toString()
         itemView.rbrMovieRating.rating = movie.getRatingBaseOnFiveStars()

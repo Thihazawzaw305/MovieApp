@@ -22,4 +22,5 @@ interface MovieModel {
         onSuccess: (List<ActorVO>) -> Unit,
         onFailure: (String) -> Unit
     )
+    fun getAllMovies() : LiveData<List<MovieVO>>?
 }

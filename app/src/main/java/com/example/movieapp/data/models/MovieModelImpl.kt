@@ -77,4 +77,10 @@ object MovieModelImpl: MovieModel, BaseModel() {
                 onSuccess(it.cast?: listOf())
             },{onFailure(it.localizedMessage ?: "")})
     }
+
+    override fun getAllMovies(): LiveData<List<MovieVO>>? {
+        return mMovieDatabase?.movieDao()?.getAllMovies()
+    }
+
+
 }
